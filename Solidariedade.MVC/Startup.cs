@@ -33,7 +33,7 @@ namespace Solidariedade.MVC
                  .AddOpenIdConnect("oidc", options =>
                         {
                             options.Authority = "https://localhost:44370/";
-                            options.ClientId = "openIdConnectClient";
+                            options.ClientId = "SolidariedadeApp";
                             options.SignInScheme = "cookie";
                         });
         }
