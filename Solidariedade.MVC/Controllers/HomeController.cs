@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -25,9 +28,11 @@ namespace Solidariedade.MVC.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Logout()
         {
-            return View();
+            //TODO: remover magic-word
+            return new SignOutResult(new[] { "oidc", "cookie" });
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
