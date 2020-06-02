@@ -36,16 +36,11 @@ namespace Solidariedade.DataAccess.Migrations
                     b.Property<Guid?>("DoneePersonId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("ItemsId")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DonatorPersonId");
 
                     b.HasIndex("DoneePersonId");
-
-                    b.HasIndex("ItemsId");
 
                     b.ToTable("doacao");
                 });
@@ -66,16 +61,11 @@ namespace Solidariedade.DataAccess.Migrations
                     b.Property<Guid?>("ProductId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("ProductId1")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DonationId");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("ProductId1");
 
                     b.ToTable("item_doacao");
                 });
@@ -362,30 +352,22 @@ namespace Solidariedade.DataAccess.Migrations
                     b.HasOne("Solidariedade.Domain.Entities.Donee.DoneePerson", null)
                         .WithMany("Donations")
                         .HasForeignKey("DoneePersonId");
-
-                    b.HasOne("Solidariedade.Domain.Entities.Donator.DonationItem", "Items")
-                        .WithMany()
-                        .HasForeignKey("ItemsId");
                 });
 
             modelBuilder.Entity("Solidariedade.Domain.Entities.Donator.DonationItem", b =>
                 {
-                    b.HasOne("Solidariedade.Domain.Entities.Donator.Donation", null)
-                        .WithMany()
+                    b.HasOne("Solidariedade.Domain.Entities.Donator.Donation", "Donation")
+                        .WithMany("Items")
                         .HasForeignKey("DonationId");
 
                     b.HasOne("Solidariedade.Domain.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
-
-                    b.HasOne("Solidariedade.Domain.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductId1");
                 });
 
             modelBuilder.Entity("Solidariedade.Domain.Entities.Donator.DonationProduct", b =>
                 {
-                    b.HasOne("Solidariedade.Domain.Entities.Donator.DonatorPerson", null)
+                    b.HasOne("Solidariedade.Domain.Entities.Donator.DonatorPerson", "DonatorPerson")
                         .WithMany("DonationProducts")
                         .HasForeignKey("DonatorPersonId");
 

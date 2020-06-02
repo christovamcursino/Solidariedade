@@ -4,19 +4,7 @@ using System.Collections.Generic;
 
 namespace Solidariedade.Domain.Interfaces.Repositories
 {
-    public interface IDoneePersonRepository
+    public interface IDoneePersonRepository : IPersonRepository<Guid, DoneePerson>
     {
-        DoneePerson Insert(DoneePerson DoneePerson);
-
-        IEnumerable<DoneePerson> SelectAll();
-
-        DoneePerson Select(Guid id);
-        DoneePerson SelectByEmail(String email);
-
-        void Update(DoneePerson DoneePerson);
-
-        void Delete(Guid id);
-
-        void SaveChanges();
     }
 }

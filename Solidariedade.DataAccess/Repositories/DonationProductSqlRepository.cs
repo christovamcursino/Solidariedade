@@ -4,56 +4,24 @@ using Solidariedade.Domain.Interfaces.Repositories;
 using Solidariedade.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Solidariedade.DataAccess.Repositories
 {
-    public class DonationProductSqlRepository : IDonationProductProductRepository
+    public class DonationProductSqlRepository : RepositorySqlBase<Guid, DonationProduct>, IDonationProductProductRepository
     {
-        private DbContext _context;
+        public DonationProductSqlRepository(DbContext context) : base(context) { }
 
-        public DonationProductSqlRepository(DbContext context)
+        public IEnumerable<DonationProduct> GetAllDonationProductOfPerson(DonatorPerson donatorPerson)
         {
-            _context = context;
+            return _context.Set<DonationProduct>()
+                .Where<DonationProduct>(o => o.DonatorPerson.Id.Equals(donatorPerson.Id));
         }
 
-        public DonationProduct Insert(DonationProduct DonationProduct)
+        public IEnumerable<DonationProduct> GetAllDonationProductOfState(State state)
         {
-            return _context.Set<DonationProduct>().Add(DonationProduct).Entity;
-        }
-        public IEnumerable<DonationProduct> SelectAll()
-        {
-            return _context.Set<DonationProduct>();
-        }
-
-        public DonationProduct Select(Guid id)
-        {
-            return _context.Set<DonationProduct>().Find(id);
-        }
-
-        public void Update(DonationProduct DonationProduct)
-        {
-            _context.Set<DonationProduct>().Update(DonationProduct);
-        }
-
-        public void Delete(Guid id)
-        {
-            _context.Set<DonationProduct>().Remove(Select(id));
-        }
-
-        public IEnumerable<DonationProduct> SelectAllByPerson(DonatorPerson DonatorPerson)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<DonationProduct> SelectAllByState(State state)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
+            return _context.Set<DonationProduct>()
+                .Where<DonationProduct>(o => o.DonatorPerson.State.UF.Equals(state.UF));
         }
     }
 }

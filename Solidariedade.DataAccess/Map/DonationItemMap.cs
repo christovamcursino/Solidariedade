@@ -24,7 +24,7 @@ namespace Solidariedade.DataAccess.Map
                 .HasColumnType<int>("Integer");
 
             builder
-                .HasOne<Product>();
+                .HasOne(o => o.Product);
         }
     }
 }

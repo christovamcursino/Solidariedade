@@ -22,7 +22,9 @@ namespace Solidariedade.DataAccess.Map
                 .HasColumnName("dt_doacao")
                 .HasColumnType<DateTime>("Date");
 
-            builder.HasMany<DonationItem>();
+            builder
+                .HasMany(o => o.Items)
+                .WithOne(p => p.Donation);
         }
     }
 }

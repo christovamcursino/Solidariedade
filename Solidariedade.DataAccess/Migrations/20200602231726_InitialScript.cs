@@ -55,13 +55,40 @@ namespace Solidariedade.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "doacao",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    dt_doacao = table.Column<DateTime>(type: "Date", nullable: false),
+                    DonationDeliveryType = table.Column<int>(nullable: false),
+                    DonatorPersonId = table.Column<Guid>(nullable: true),
+                    DoneePersonId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_doacao", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_doacao_Pessoa_DonatorPersonId",
+                        column: x => x.DonatorPersonId,
+                        principalTable: "Pessoa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_doacao_Pessoa_DoneePersonId",
+                        column: x => x.DoneePersonId,
+                        principalTable: "Pessoa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "produto_para_doacao",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    DonatorPersonId = table.Column<Guid>(nullable: true),
                     nu_quantidade = table.Column<int>(type: "integer", nullable: false),
-                    ProductId = table.Column<Guid>(nullable: true),
-                    DonatorPersonId = table.Column<Guid>(nullable: true)
+                    ProductId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,58 +138,23 @@ namespace Solidariedade.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    nu_quantidade = table.Column<int>(type: "Integer", nullable: false),
-                    ProductId = table.Column<Guid>(nullable: true),
                     DonationId = table.Column<Guid>(nullable: true),
-                    ProductId1 = table.Column<Guid>(nullable: true)
+                    nu_quantidade = table.Column<int>(type: "Integer", nullable: false),
+                    ProductId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_item_doacao", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_item_doacao_doacao_DonationId",
+                        column: x => x.DonationId,
+                        principalTable: "doacao",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_item_doacao_Produto_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Produto",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_item_doacao_Produto_ProductId1",
-                        column: x => x.ProductId1,
-                        principalTable: "Produto",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "doacao",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    dt_doacao = table.Column<DateTime>(type: "Date", nullable: false),
-                    DonationDeliveryType = table.Column<int>(nullable: false),
-                    ItemsId = table.Column<Guid>(nullable: true),
-                    DonatorPersonId = table.Column<Guid>(nullable: true),
-                    DoneePersonId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_doacao", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_doacao_Pessoa_DonatorPersonId",
-                        column: x => x.DonatorPersonId,
-                        principalTable: "Pessoa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_doacao_Pessoa_DoneePersonId",
-                        column: x => x.DoneePersonId,
-                        principalTable: "Pessoa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_doacao_item_doacao_ItemsId",
-                        column: x => x.ItemsId,
-                        principalTable: "item_doacao",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -212,11 +204,6 @@ namespace Solidariedade.DataAccess.Migrations
                 column: "DoneePersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_doacao_ItemsId",
-                table: "doacao",
-                column: "ItemsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_item_doacao_DonationId",
                 table: "item_doacao",
                 column: "DonationId");
@@ -225,11 +212,6 @@ namespace Solidariedade.DataAccess.Migrations
                 name: "IX_item_doacao_ProductId",
                 table: "item_doacao",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_item_doacao_ProductId1",
-                table: "item_doacao",
-                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pessoa_StateUF",
@@ -255,29 +237,12 @@ namespace Solidariedade.DataAccess.Migrations
                 name: "IX_produto_solicitado_ProductId",
                 table: "produto_solicitado",
                 column: "ProductId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_item_doacao_doacao_DonationId",
-                table: "item_doacao",
-                column: "DonationId",
-                principalTable: "doacao",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_doacao_Pessoa_DonatorPersonId",
-                table: "doacao");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_doacao_Pessoa_DoneePersonId",
-                table: "doacao");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_doacao_item_doacao_ItemsId",
-                table: "doacao");
+            migrationBuilder.DropTable(
+                name: "item_doacao");
 
             migrationBuilder.DropTable(
                 name: "produto_para_doacao");
@@ -286,19 +251,16 @@ namespace Solidariedade.DataAccess.Migrations
                 name: "produto_solicitado");
 
             migrationBuilder.DropTable(
-                name: "Pessoa");
-
-            migrationBuilder.DropTable(
-                name: "Estado");
-
-            migrationBuilder.DropTable(
-                name: "item_doacao");
-
-            migrationBuilder.DropTable(
                 name: "doacao");
 
             migrationBuilder.DropTable(
                 name: "Produto");
+
+            migrationBuilder.DropTable(
+                name: "Pessoa");
+
+            migrationBuilder.DropTable(
+                name: "Estado");
         }
     }
 }

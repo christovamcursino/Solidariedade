@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace Solidariedade.Domain.Interfaces.Repositories
 {
-    public interface IProductRepository : IRepository<Guid, Product>
+    public interface IPersonRepository<TId, T> : IRepository<TId, T> where T: Person
     {
+        T GetByEmail(String email);
     }
 }

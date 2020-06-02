@@ -1,53 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Solidariedade.Domain.Entities.Donator;
+using Solidariedade.Domain.Entities.Donee;
 using Solidariedade.Domain.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Solidariedade.DataAccess.Repositories
 {
-    public class DonationItemSqlRepository : IDonationItemRepository
+    public class DonationItemSqlRepository : RepositorySqlBase<Guid, DonationItem>, IDonationItemRepository
     {
-        private DbContext _context;
-
-        public DonationItemSqlRepository(DbContext context)
+        public DonationItemSqlRepository(DbContext context) : base(context) { }
+        public IEnumerable<DonationItem> GetByDonation(Donation donation)
         {
-            _context = context;
+            return _context.Set<DonationItem>()
+                .Where<DonationItem>(o => o.Donation.Id.Equals(donation.Id));
         }
-
-        public DonationItem Insert(DonationItem DonationItem)
-        {
-            return _context.Set<DonationItem>().Add(DonationItem).Entity;
-        }
-        public IEnumerable<DonationItem> SelectAll()
-        {
-            return _context.Set<DonationItem>();
-        }
-
-        public DonationItem Select(Guid id)
-        {
-            return _context.Set<DonationItem>().Find(id);
-        }
-
-        public void Update(DonationItem DonationItem)
-        {
-            _context.Set<DonationItem>().Update(DonationItem);
-        }
-
-        public void Delete(Guid id)
-        {
-            _context.Set<DonationItem>().Remove(Select(id));
-        }
-
-        public IEnumerable<DonationItem> SelectByDonation(Donation donation)
-        {
-            throw new NotImplementedException();
-        }
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-
     }
 }

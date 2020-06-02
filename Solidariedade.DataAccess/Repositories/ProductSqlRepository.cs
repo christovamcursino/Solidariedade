@@ -9,42 +9,8 @@ using System.Text;
 
 namespace Solidariedade.DataAccess.Repositories
 {
-    public class ProductSqlRepository : IProductRepository
+    public class ProductSqlRepository : RepositorySqlBase<Guid, Product>, IProductRepository
     {
-        private DbContext _context;
-
-        public ProductSqlRepository(DbContext context)
-        {
-            _context = context;
-        }
-
-        public Product Insert(Product Product)
-        {
-            return _context.Set<Product>().Add(Product).Entity;
-        }
-        public IEnumerable<Product> SelectAll()
-        {
-            return _context.Set<Product>();
-        }
-
-        public Product Select(Guid id)
-        {
-            return _context.Set<Product>().Find(id);
-        }
-
-        public void Update(Product Product)
-        {
-            _context.Set<Product>().Update(Product);
-        }
-
-        public void Delete(Guid id)
-        {
-            _context.Set<Product>().Remove(Select(id));
-        }
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-
+        public ProductSqlRepository(DbContext context) : base(context) { }
     }
 }

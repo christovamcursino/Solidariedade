@@ -4,54 +4,26 @@ using Solidariedade.Domain.Interfaces.Repositories;
 using Solidariedade.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Solidariedade.DataAccess.Repositories
 {
-    public class RequestedProductSqlRepository : IRequestedProductRepository
+    public class RequestedProductSqlRepository : RepositorySqlBase<Guid, RequestedProduct>, IRequestedProductRepository
     {
-        private DbContext _context;
-
-        public RequestedProductSqlRepository(DbContext context)
+        public RequestedProductSqlRepository(DbContext context) : base(context)
         {
-            _context = context;
         }
 
-        public RequestedProduct Insert(RequestedProduct RequestedProduct)
+        public IEnumerable<RequestedProduct> GetAllRequestedProductOfPerson(DoneePerson doneePerson)
         {
-            return _context.Set<RequestedProduct>().Add(RequestedProduct).Entity;
-        }
-        public IEnumerable<RequestedProduct> SelectAll()
-        {
-            return _context.Set<RequestedProduct>();
+            return _context.Set<RequestedProduct>()
+                .Where<RequestedProduct>(o => o.DoneePerson.Id.Equals(doneePerson.Id));
         }
 
-        public RequestedProduct Select(Guid id)
+        public IEnumerable<RequestedProduct> GetAllRequestedProductOfState(State state)
         {
-            return _context.Set<RequestedProduct>().Find(id);
-        }
-
-        public void Update(RequestedProduct RequestedProduct)
-        {
-            _context.Set<RequestedProduct>().Update(RequestedProduct);
-        }
-
-        public void Delete(Guid id)
-        {
-            _context.Set<RequestedProduct>().Remove(Select(id));
-        }
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-
-        public IEnumerable<RequestedProduct> SelectAllByPerson(DoneePerson DoneePerson)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<RequestedProduct> SelectAllByState(State state)
-        {
-            throw new NotImplementedException();
+            return _context.Set<RequestedProduct>()
+                .Where<RequestedProduct>(o => o.DoneePerson.State.UF.Equals(state.UF));
         }
     }
 }

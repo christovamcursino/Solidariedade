@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Solidariedade.Domain.Entities.Donator
 {
-    public class Donation
+    public class Donation : TEntity<Guid>
     {
-        public Guid Id { get; set; }
         public DateTime DonationDate { get; set; }
         /// <summary>
         /// Tipo de entrega da doacao
@@ -13,7 +14,7 @@ namespace Solidariedade.Domain.Entities.Donator
         /// <summary>
         /// Itens desta doacao
         /// </summary>
-        public DonationItem Items { get; set; }
+        public IEnumerable<DonationItem> Items { get; set; }
     }
 
     /// <summary>

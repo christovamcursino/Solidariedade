@@ -6,21 +6,9 @@ using System.Collections.Generic;
 
 namespace Solidariedade.Domain.Interfaces.Repositories
 {
-    public interface IRequestedProductRepository
+    public interface IRequestedProductRepository: IRepository<Guid, RequestedProduct>
     {
-        RequestedProduct Insert(RequestedProduct RequestedProduct);
-
-        IEnumerable<RequestedProduct> SelectAll();
-
-        IEnumerable<RequestedProduct> SelectAllByPerson(DoneePerson DoneePerson);
-        IEnumerable<RequestedProduct> SelectAllByState(State state);
-
-        RequestedProduct Select(Guid id);
-
-        void Update(RequestedProduct RequestedProduct);
-
-        void Delete(Guid id);
-
-        void SaveChanges();
+        IEnumerable<RequestedProduct> GetAllRequestedProductOfPerson(DoneePerson DoneePerson);
+        IEnumerable<RequestedProduct> GetAllRequestedProductOfState(State state);
     }
 }

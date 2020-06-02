@@ -2,9 +2,9 @@
 
 namespace Solidariedade.Domain.Entities.Donee
 {
-    public class RequestedProduct
+    public class RequestedProduct : TEntity<Guid>
     {
-        public Guid Id { get; set; }
+        public DoneePerson DoneePerson;
         public int Amount { get; set; }
         public Product Product { get; set; }
     }
