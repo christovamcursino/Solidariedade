@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Solidariedade.Domain.Interfaces.Services
+namespace Solidariedade.Application.Interfaces
 {
-    public interface IDoneePersonService
+    public interface IDoneePersonApp
     {
         Person AddDoneePerson(DoneePerson doneePerson);
         DoneePerson GetDoneePersonByEmail(String email);

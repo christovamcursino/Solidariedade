@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Solidariedade.Domain.Interfaces.Services
+namespace Solidariedade.Application.Interfaces
 {
-    public interface IDonationService
+    public interface IDonationApp
     {
         Donation AddDonation(Donation donation);
         IEnumerable<Donation> GetAllDonations();

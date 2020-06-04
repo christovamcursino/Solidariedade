@@ -4,14 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Solidariedade.Domain.Interfaces.Services
+namespace Solidariedade.Application.Interfaces
 {
-    public interface IRequestedProductService
+    public interface IRequestedProductApp
     {
         RequestedProduct AddRequestedProduct(RequestedProduct requestedProduct);
         IEnumerable<RequestedProduct> GetAllRequestedProducts();
         RequestedProduct GetRequestedProduct(Guid id);
-        IEnumerable<RequestedProduct> GetRequestedProductsByState(State state);
-        IEnumerable<RequestedProduct> GetRequestedProductsOfPerson(DoneePerson doneePerson);
+        IEnumerable<RequestedProduct> GetRequestedProductsByState(String strUf);
     }
 }

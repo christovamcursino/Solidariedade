@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Solidariedade.Domain.Interfaces.Services
+namespace Solidariedade.Application.Interfaces
 {
-    public interface IDonatorPersonService
+    public interface IDonatorPersonApp
     {
         DonatorPerson AddDonatorPerson(DonatorPerson donatorPerson);
-        DonatorPerson GetDonatorPersonByEmail(String email);
         IEnumerable<DonatorPerson> GetAllDonators();
+        DonatorPerson GetDonatorPersonByEmail(String email);
     }
 }
