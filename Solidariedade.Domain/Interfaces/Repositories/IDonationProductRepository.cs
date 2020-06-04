@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Solidariedade.Domain.Interfaces.Repositories
 {
-    public interface IDonationProductProductRepository : IRepository<Guid, DonationProduct>
+    public interface IDonationProductRepository : IRepository<Guid, DonationProduct>
     {
         IEnumerable<DonationProduct> GetAllDonationProductOfPerson(DonatorPerson donatorPerson);
         IEnumerable<DonationProduct> GetAllDonationProductOfState(State state);

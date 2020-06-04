@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Solidariedade.Application\Solidariedade.Application.csproj" />
+    <ProjectReference Include="..\Solidariedade.CrossCutting\Solidariedade.CrossCutting.csproj" />
     <ProjectReference Include="..\Solidariedade.Domain\Solidariedade.Domain.csproj" />
   </ItemGroup>
 

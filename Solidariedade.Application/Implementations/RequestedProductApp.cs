@@ -5,7 +5,7 @@ using Solidariedade.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 
-namespace Solidariedade.Domain.Services
+namespace Solidariedade.Application.Implementations
 {
     public class RequestedProductApp : IRequestedProductApp
     {

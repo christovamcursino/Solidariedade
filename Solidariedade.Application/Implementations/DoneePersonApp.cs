@@ -1,14 +1,10 @@
 ﻿using Solidariedade.Application.Interfaces;
 using Solidariedade.Domain.Entities;
 using Solidariedade.Domain.Entities.Donee;
-using Solidariedade.Domain.Interfaces.Repositories;
 using Solidariedade.Domain.Interfaces.Services;
-using Solidariedade.Domain.Interfaces.UoW;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Solidariedade.Domain.Services
+namespace Solidariedade.Application.Implementations
 {
     public class DoneePersonApp : IDoneePersonApp
     {

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Solidariedade.DataAccess.Repositories
 {
-    public class DonationProductSqlRepository : RepositorySqlBase<Guid, DonationProduct>, IDonationProductProductRepository
+    public class DonationProductSqlRepository : RepositorySqlBase<Guid, DonationProduct>, IDonationProductRepository
     {
         public DonationProductSqlRepository(DbContext context) : base(context) { }
 

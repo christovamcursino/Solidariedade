@@ -30,12 +30,13 @@ namespace Solidariedade.Domain.Services
             return result;
         }
 
-        public IEnumerable<RequestedProduct> GetAllRequestedProduct()
+        public IEnumerable<RequestedProduct> GetAllRequestedProducts()
         {
             return _requestedProductRepository.GetAll();
         }
 
-        public RequestedProduct GetRequestedProducts(Guid id)
+
+        public RequestedProduct GetRequestedProduct(Guid id)
         {
             return _requestedProductRepository.GetByID(id);
         }
