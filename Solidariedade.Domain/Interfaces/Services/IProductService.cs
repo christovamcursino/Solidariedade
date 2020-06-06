@@ -7,6 +7,7 @@ namespace Solidariedade.Domain.Interfaces.Services
 {
     public interface IProductService
     {
+        Product GetProductByID(Guid id);
         Product AddProduct(Product product);
         IEnumerable<Product> GetAllProducts();
         IEnumerable<Product> GetProductsByName(string name);

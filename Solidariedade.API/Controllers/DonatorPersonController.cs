@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Solidariedade.API.Controllers
 {
     [ApiVersion("1")]
-    [Route("api/[controller]/{version}")]
+    [Route("api/[controller]")]
     [ApiController]
     public class DonatorPersonController : ControllerBase
     {
@@ -31,7 +31,7 @@ namespace Solidariedade.API.Controllers
         }
 
         // GET api/<DonatorPersonController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{email}")]
         public DonatorPerson Get(string email)
         {
             return _donatorPersonApp.GetDonatorPersonByEmail(email);

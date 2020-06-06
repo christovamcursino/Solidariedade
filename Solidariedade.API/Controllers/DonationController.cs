@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace Solidariedade.API.Controllers
 {
+    [ApiVersion("1")]
     [Route("api/[controller]")]
     [ApiController]
     public class DonationController : ControllerBase
@@ -39,6 +40,12 @@ namespace Solidariedade.API.Controllers
         // POST api/<DonationController>
         [HttpPost]
         public void Post([FromBody] Donation donation)
+        {
+            _donationApp.AddDonation(donation);
+        }
+
+        [HttpPost("/requested/")]
+        public void PostRequested([FromBody] Donation donation)
         {
             _donationApp.AddDonation(donation);
         }

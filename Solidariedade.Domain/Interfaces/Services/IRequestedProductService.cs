@@ -13,5 +13,6 @@ namespace Solidariedade.Domain.Interfaces.Services
         RequestedProduct GetRequestedProduct(Guid id);
         IEnumerable<RequestedProduct> GetRequestedProductsByState(State state);
         IEnumerable<RequestedProduct> GetRequestedProductsOfPerson(DoneePerson doneePerson);
+        void CheckOutRequestedProducts(IEnumerable<RequestedProduct> requestedProducts);
     }
 }

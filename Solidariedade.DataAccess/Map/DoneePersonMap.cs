@@ -9,13 +9,12 @@ namespace Solidariedade.DataAccess.Map
     {
         public void Configure(EntityTypeBuilder<DoneePerson> builder)
         {
-            builder.HasMany<RequestedProduct>(
-                n => n.RequestedProducts
-                );
+            builder
+                .HasMany(n => n.RequestedProducts)
+                .WithOne(p => p.DoneePerson);
 
-            builder.HasMany<Donation>(
-                n => n.Donations
-                );
+            builder
+                .HasMany(n => n.Donations);
         }
     }
 }

@@ -12,17 +12,20 @@ namespace Solidariedade.Domain.Services
     {
         private IUnitOfWork _uow;
         private IDoneePersonRepository _donnePersonRepository;
+        private IStateService _stateService;
 
-        public DoneePersonService(IUnitOfWork uow, IDoneePersonRepository donnePersonRepository)
+        public DoneePersonService(IUnitOfWork uow, IDoneePersonRepository donnePersonRepository, IStateService stateService)
         {
             _uow = uow;
             _donnePersonRepository = donnePersonRepository;
+            _stateService = stateService;
         }
 
         public Person AddDoneePerson(DoneePerson doneePerson)
         {
             _uow.BeginTransaction();
             doneePerson.Id = Guid.NewGuid();
+            doneePerson.State = _stateService.GetByUF(doneePerson.State.UF);
             DoneePerson result = _donnePersonRepository.Insert(doneePerson);
             _uow.Commit();
 
@@ -37,6 +40,11 @@ namespace Solidariedade.Domain.Services
         public DoneePerson GetDoneePersonByEmail(string email)
         {
             return _donnePersonRepository.GetByEmail(email);
+        }
+
+        public DoneePerson GetDoneePersonByID(Guid id)
+        {
+            return _donnePersonRepository.GetByID(id);
         }
         //INCLUIR A VALIDACAO
     }

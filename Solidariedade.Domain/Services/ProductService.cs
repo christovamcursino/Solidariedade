@@ -34,6 +34,11 @@ namespace Solidariedade.Domain.Services
             return _productRepository.GetAll();
         }
 
+        public Product GetProductByID(Guid id)
+        {
+            return _productRepository.GetByID(id);
+        }
+
         public IEnumerable<Product> GetProductsByName(string name)
         {
             return _productRepository.GetProductsLikeName(name);

@@ -15,17 +15,17 @@ namespace Solidariedade.DataAccess.Repositories
             _context = context;
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _context.Set<T>();
         }
 
-        public T GetByID(TId id)
+        public virtual T GetByID(TId id)
         {
             return _context.Set<T>().Find(id);
         }
 
-        public T Insert(T entity)
+        public virtual T Insert(T entity)
         {
             return _context.Set<T>().Add(entity).Entity;
         }
@@ -35,7 +35,7 @@ namespace Solidariedade.DataAccess.Repositories
             _context.Set<T>().Update(entity);
         }
 
-        public void Delete(TId id)
+        public virtual void Delete(TId id)
         {
             _context.Set<T>().Remove(GetByID(id));
         }

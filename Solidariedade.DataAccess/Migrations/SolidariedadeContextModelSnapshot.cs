@@ -378,7 +378,7 @@ namespace Solidariedade.DataAccess.Migrations
 
             modelBuilder.Entity("Solidariedade.Domain.Entities.Donee.RequestedProduct", b =>
                 {
-                    b.HasOne("Solidariedade.Domain.Entities.Donee.DoneePerson", null)
+                    b.HasOne("Solidariedade.Domain.Entities.Donee.DoneePerson", "DoneePerson")
                         .WithMany("RequestedProducts")
                         .HasForeignKey("DoneePersonId");
 

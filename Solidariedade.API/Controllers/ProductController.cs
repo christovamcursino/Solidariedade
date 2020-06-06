@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace Solidariedade.API.Controllers
 {
+    [ApiVersion("1")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -21,8 +22,6 @@ namespace Solidariedade.API.Controllers
             _logger = logger;
             _productApp = productApp;
         }
-
-
 
         // GET: api/<ProductController>
         [HttpGet]

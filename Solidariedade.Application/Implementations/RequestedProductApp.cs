@@ -37,5 +37,10 @@ namespace Solidariedade.Application.Implementations
             state.UF = strUf;
             return _requestedProductService.GetRequestedProductsByState(state);
         }
+
+        public IEnumerable<RequestedProduct> GetRequestedProductsOfPerson(DoneePerson doneePerson)
+        {
+            return _requestedProductService.GetRequestedProductsOfPerson(doneePerson);
+        }
     }
 }

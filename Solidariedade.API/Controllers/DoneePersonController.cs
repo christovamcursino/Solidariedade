@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace Solidariedade.API.Controllers
 {
+    [ApiVersion("1")]
     [Route("api/[controller]")]
     [ApiController]
     public class DoneePersonController : ControllerBase
@@ -31,7 +32,7 @@ namespace Solidariedade.API.Controllers
         }
 
         // GET api/<DoneePersonController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{email}")]
         public DoneePerson Get(string email)
         {
             return _doneePersonApp.GetDoneePersonByEmail(email);

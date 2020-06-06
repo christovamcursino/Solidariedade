@@ -10,6 +10,7 @@ namespace Solidariedade.Domain.Interfaces.Services
     public interface IDoneePersonService
     {
         Person AddDoneePerson(DoneePerson doneePerson);
+        DoneePerson GetDoneePersonByID(Guid id);
         DoneePerson GetDoneePersonByEmail(String email);
         IEnumerable<DoneePerson> GetAllDonee();
     }

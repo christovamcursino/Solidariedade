@@ -12,5 +12,6 @@ namespace Solidariedade.Application.Interfaces
         IEnumerable<RequestedProduct> GetAllRequestedProducts();
         RequestedProduct GetRequestedProduct(Guid id);
         IEnumerable<RequestedProduct> GetRequestedProductsByState(String strUf);
+        IEnumerable<RequestedProduct> GetRequestedProductsOfPerson(DoneePerson doneePerson);
     }
 }

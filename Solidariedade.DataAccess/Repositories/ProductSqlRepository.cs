@@ -13,8 +13,9 @@ namespace Solidariedade.DataAccess.Repositories
 
         public IEnumerable<Product> GetProductsLikeName(string name)
         {
+            name = name.ToUpper();
             return _context.Set<Product>()
-                .Where<Product>(o => o.Name.Contains(name));
+                .Where<Product>(o => o.Name.ToUpper().Contains(name));
         }
     }
 }

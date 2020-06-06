@@ -11,11 +11,13 @@ namespace Solidariedade.Domain.Services
     {
         private IUnitOfWork _uow;
         private IDonatorPersonRepository _donatorPersonRepository;
+        private IStateService _stateService;
 
-        public DonatorPersonService(IUnitOfWork uow, IDonatorPersonRepository donatorPersonRepository)
+        public DonatorPersonService(IUnitOfWork uow, IDonatorPersonRepository donatorPersonRepository, IStateService stateService)
         {
             _uow = uow;
             _donatorPersonRepository = donatorPersonRepository;
+            _stateService = stateService;
         }
 
         //INCLUIR A VALIDACAO
@@ -23,6 +25,7 @@ namespace Solidariedade.Domain.Services
         {
             _uow.BeginTransaction();
             donatorPerson.Id = Guid.NewGuid();
+            donatorPerson.State = _stateService.GetByUF(donatorPerson.State.UF);
             DonatorPerson result = _donatorPersonRepository.Insert(donatorPerson);
             _uow.Commit();
 

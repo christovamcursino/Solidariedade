@@ -25,5 +25,12 @@ namespace Solidariedade.DataAccess.Repositories
             return _context.Set<RequestedProduct>()
                 .Where<RequestedProduct>(o => o.DoneePerson.State.UF.Equals(state.UF));
         }
+
+        public override IEnumerable<RequestedProduct> GetAll()
+        {
+            return _context.Set<RequestedProduct>()
+                .Include(o => o.Product)
+                .Include(o => o.DoneePerson);
+        }
     }
 }

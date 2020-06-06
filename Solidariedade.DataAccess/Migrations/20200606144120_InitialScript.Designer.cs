@@ -9,7 +9,7 @@ using Solidariedade.DataAccess.Context;
 namespace Solidariedade.DataAccess.Migrations
 {
     [DbContext(typeof(SolidariedadeContext))]
-    [Migration("20200602231726_InitialScript")]
+    [Migration("20200606144120_InitialScript")]
     partial class InitialScript
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -380,7 +380,7 @@ namespace Solidariedade.DataAccess.Migrations
 
             modelBuilder.Entity("Solidariedade.Domain.Entities.Donee.RequestedProduct", b =>
                 {
-                    b.HasOne("Solidariedade.Domain.Entities.Donee.DoneePerson", null)
+                    b.HasOne("Solidariedade.Domain.Entities.Donee.DoneePerson", "DoneePerson")
                         .WithMany("RequestedProducts")
                         .HasForeignKey("DoneePersonId");
 

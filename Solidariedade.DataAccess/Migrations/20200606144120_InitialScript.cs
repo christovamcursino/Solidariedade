@@ -112,9 +112,9 @@ namespace Solidariedade.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    DoneePersonId = table.Column<Guid>(nullable: true),
                     nu_quantidade = table.Column<int>(type: "integer", nullable: false),
-                    ProductId = table.Column<Guid>(nullable: true),
-                    DoneePersonId = table.Column<Guid>(nullable: true)
+                    ProductId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {

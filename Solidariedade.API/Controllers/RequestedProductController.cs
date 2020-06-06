@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Solidariedade.Application.Interfaces;
+using Solidariedade.Domain.Entities;
 using Solidariedade.Domain.Entities.Donee;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 
 namespace Solidariedade.API.Controllers
 {
+    [ApiVersion("1")]
     [Route("api/[controller]")]
     [ApiController]
     public class RequestedProductController : ControllerBase
@@ -48,6 +50,11 @@ namespace Solidariedade.API.Controllers
         [HttpPost]
         public void Post([FromBody] RequestedProduct requestedProduct)
         {
+            if (requestedProduct.DoneePerson==null)
+            {
+                throw new Exception("Pessoa em branco");
+            }
+
             _requestedProductApp.AddRequestedProduct(requestedProduct);
         }
     }
