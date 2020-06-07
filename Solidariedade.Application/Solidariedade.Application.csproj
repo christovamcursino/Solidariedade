@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Solidariedade.Domain\Solidariedade.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
-
 </Project>

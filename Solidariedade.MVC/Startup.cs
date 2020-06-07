@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Solidariedade.CrossCutting;
 
 namespace Solidariedade.MVC
 {
@@ -32,10 +34,23 @@ namespace Solidariedade.MVC
                 }).AddCookie("cookie")
                  .AddOpenIdConnect("oidc", options =>
                         {
-                            options.Authority = "https://localhost:44370/";
+                            options.Authority = "http://localhost:5000/";
                             options.ClientId = "SolidariedadeApp";
+                            options.ClientSecret = "G7kj@as";
                             options.SignInScheme = "cookie";
+                            options.RequireHttpsMetadata = false;
+                            options.ResponseType = "code id_token";
+
+
+                            options.SaveTokens = true;
+                            options.GetClaimsFromUserInfoEndpoint = true;
+
+                            options.Scope.Add("email");
+                            options.Scope.Add("offline_access");
+                            options.ClaimActions.MapJsonKey("website", "website");
                         });
+            services.AddDbContext();
+            services.AddSolidariedadeServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

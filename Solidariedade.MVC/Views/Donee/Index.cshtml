@@ -1,0 +1,70 @@
+﻿@model Solidariedade.Application.DTO.DoneeDTO
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center">
+        <h1>Bem vindo ao Portal Solidariedade.</h1>
+        <h2>Aqui estão as suas doações recebidas.</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Produto
+                    </th>
+                    <th>
+                        Quantidade
+                    </th>
+                    <th>
+                        Doador
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.donations)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.product.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.donator.Name)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h2>Aqui estão as suas solicitações.</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Produto
+                    </th>
+                    <th>
+                        Quantidade Restante
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.requestedProducts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a asp-action="AddRequest" asp-controller="Donee" class="btn btn-dark" value="forgot">Incluir solicitação</a>
+    </div>

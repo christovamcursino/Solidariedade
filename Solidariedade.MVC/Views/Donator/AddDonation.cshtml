@@ -1,0 +1,40 @@
+﻿@model DonationProductItemViewModel
+
+@{
+    ViewData["Title"] = "Doar";
+}
+
+
+<h1>Efetuar doação</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddDonation">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdDonee" />
+            <input type="hidden" asp-for="RequestedProduct.Id" />
+
+            <div class="form-group">
+                <label asp-for="RequestedProduct.Product" class="control-label">Produto</label>
+                <input asp-for="RequestedProduct.Product.Name" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="RequestedProduct.Amount" class="control-label">Quantidade</label>
+                <input asp-for="RequestedProduct.Amount" class="form-control" />
+                <span asp-validation-for="RequestedProduct.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Efetuar doação" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

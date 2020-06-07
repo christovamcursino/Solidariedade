@@ -9,30 +9,41 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Solidariedade.Application.Interfaces;
+using Solidariedade.MVC.Helpers;
 using Solidariedade.MVC.Models;
 
 namespace Solidariedade.MVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : CustomBaseController
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ISessionApp sessionApp) : base(logger, sessionApp)
         {
-            _logger = logger;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
+            if (_sessionApp.IsNewUser())
+            {
+                return RedirectToAction("Create", "Person");
+            }
+
+            if (_sessionApp.IsCurrentUserADonator())
+            {
+                return RedirectToAction("Index", "Donator");
+            }
+
+            if (_sessionApp.IsCurrentUserADonee())
+            {
+                return RedirectToAction("Index", "Donee");
+            }
+
             return View();
         }
 
         public IActionResult Logout()
         {
-            //TODO: remover magic-word
             return new SignOutResult(new[] { "oidc", "cookie" });
-
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Solidariedade.Application.DTO;
 using Solidariedade.Application.Interfaces;
 using Solidariedade.Domain.Entities.Donator;
 using System.Collections.Generic;
@@ -30,13 +31,6 @@ namespace Solidariedade.API.Controllers
             return _donationApp.GetAllDonations();
         }
 
-        //// GET api/<DonationController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
         // POST api/<DonationController>
         [HttpPost]
         public void Post([FromBody] Donation donation)
@@ -44,10 +38,10 @@ namespace Solidariedade.API.Controllers
             _donationApp.AddDonation(donation);
         }
 
-        [HttpPost("/requested/")]
-        public void PostRequested([FromBody] Donation donation)
+        [HttpPost("requested")]
+        public void PostRequested([FromBody] DonationRequestedProductDTO donationRequestedProductDTO)
         {
-            _donationApp.AddDonation(donation);
+            _donationApp.AddDonation(donationRequestedProductDTO);
         }
     }
 }

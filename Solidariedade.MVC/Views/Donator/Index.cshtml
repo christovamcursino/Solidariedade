@@ -1,0 +1,79 @@
+﻿@model Solidariedade.Application.DTO.DonatorDTO
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+    <h1>Bem vindo ao Portal Solidariedade.</h1>
+    <h2>Aqui estão as necessidades do seu estado.</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Produto
+                </th>
+                <th>
+                    Quantidade
+                </th>
+                <th>
+                    Pessoa carente
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RequestedProducts)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestedProduct.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestedProduct.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Donee.Name)
+                    </td>
+                    <td>
+                        <a asp-action="AddDonation" asp-route-id="@item.RequestedProduct.Id">Doar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Aqui estão as suas doações.</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Produto
+                </th>
+                <th>
+                    Quantidade
+                </th>
+                <th>
+                    Donatário
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Donations)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.donee.Name)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -22,7 +22,7 @@ namespace Solidariedade.MVC.Controllers
         // GET: RequestedProductController
         public ActionResult Index()
         {
-            return View(_requestedProductApp.GetRequestedProductsOfPerson( (DoneePerson) _sessionApp.GetDoneePerson()));
+            return View(_requestedProductApp.GetRequestedProductsOfPerson( (DoneePerson) _sessionApp.GetLoggedPerson()));
         }
 
         // GET: RequestedProductController/Details/5
@@ -44,7 +44,7 @@ namespace Solidariedade.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                requestedProduct.DoneePerson = (DoneePerson) _sessionApp.GetDoneePerson();
+                requestedProduct.DoneePerson = (DoneePerson) _sessionApp.GetLoggedPerson();
                 _requestedProductApp.AddRequestedProduct(requestedProduct);
                 return RedirectToAction(nameof(Index));
             }

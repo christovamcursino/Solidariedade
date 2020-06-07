@@ -17,6 +17,9 @@ namespace Solidariedade.DataAccess.Repositories
                 .Include(o => o.State)
                 .Include(o => o.DonationProducts)
                 .Include(o => o.Donations)
+                    .ThenInclude(d => d.DoneePerson)
+                .Include(o => o.Donations)
+                    .ThenInclude(d => d.Items).ThenInclude(i => i.Product)
                 .Where(o => o.Email == email)
                 .FirstOrDefault<DonatorPerson>();
         }

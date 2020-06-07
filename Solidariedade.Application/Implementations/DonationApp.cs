@@ -1,4 +1,5 @@
-﻿using Solidariedade.Application.Interfaces;
+﻿using Solidariedade.Application.DTO;
+using Solidariedade.Application.Interfaces;
 using Solidariedade.Domain.Entities.Donator;
 using Solidariedade.Domain.Entities.Donee;
 using Solidariedade.Domain.Interfaces.Services;
@@ -20,9 +21,9 @@ namespace Solidariedade.Application.Implementations
             return _donationService.AddDonation(donation);
         }
 
-        public Donation AddDonation(Donation donation, IEnumerable<RequestedProduct> requestedProducts)
+        public Donation AddDonation(DonationRequestedProductDTO donationRequestedProductDTO)
         {
-            return _donationService.AddDonation(donation, requestedProducts);
+            return _donationService.AddDonation(donationRequestedProductDTO.Donation, donationRequestedProductDTO.RequestedProducts);
         }
 
         public IEnumerable<Donation> GetAllDonations()

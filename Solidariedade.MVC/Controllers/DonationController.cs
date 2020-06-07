@@ -46,7 +46,7 @@ namespace Solidariedade.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                donation.DonatorPerson = (DonatorPerson) _sessionApp.GetDonatorPerson();
+                donation.DonatorPerson = (DonatorPerson)_sessionApp.GetLoggedPerson();
                 _donationApp.AddDonation(donation);
                 //doneeperson tem que vir do objeto escolhido
                 return RedirectToAction(nameof(Index));

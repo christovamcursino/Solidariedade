@@ -13,13 +13,19 @@ namespace Solidariedade.Domain.Services
     {
         private IUnitOfWork _uow;
         private IDonationRepository _donationRepository;
-        private IRequestedProductService __requestedProductService;
+        private IRequestedProductService _requestedProductService;
+        private IProductService _productService;
+        private IDoneePersonService _doneePersonService;
+        private IDonatorPersonService _donatorPersonService;
 
-        public DonationService(IUnitOfWork uow, IDonationRepository donationRepository, IRequestedProductService requestedProductService)
+        public DonationService(IUnitOfWork uow, IDonationRepository donationRepository, IRequestedProductService requestedProductService, IProductService productService, IDoneePersonService doneePersonService, IDonatorPersonService donatorPersonService)
         {
             _uow = uow;
             _donationRepository = donationRepository;
-            __requestedProductService = requestedProductService;
+            _requestedProductService = requestedProductService;
+            _productService = productService;
+            _doneePersonService = doneePersonService;
+            _donatorPersonService = donatorPersonService;
         }
 
         //INCLUIR A VALIDACAO
@@ -27,30 +33,52 @@ namespace Solidariedade.Domain.Services
         public Donation AddDonation(Donation donation)
         {
             _uow.BeginTransaction();
-            donation.Id = Guid.NewGuid();
+            prepare(donation);
+
+            foreach (DonationItem item in donation.Items)
+            {
+                if (item.Product.Id == null || item.Product.Id.Equals(Guid.Empty))
+                {
+                    item.Product.Id = Guid.NewGuid();
+                }
+                else
+                {
+                    item.Product = _productService.GetProductByID(item.Product.Id);
+                }
+            }
+
             Donation result = _donationRepository.Insert(donation);
             _uow.Commit();
             return result;
         }
 
+        private void prepare(Donation donation)
+        {
+            donation.Id = Guid.NewGuid();
+            donation.DonatorPerson = _donatorPersonService.GetDonatorPersonByID(donation.DonatorPerson.Id);
+            donation.DoneePerson = _doneePersonService.GetDoneePersonByID(donation.DoneePerson.Id);
+            donation.DonationDate = DateTime.Now;
+        }
+
         public Donation AddDonation(Donation donation, IEnumerable<RequestedProduct> requestedProducts)
         {
             _uow.BeginTransaction();
-            donation.Id = Guid.NewGuid();
+            prepare(donation);
 
             List<DonationItem> donationItems = new List<DonationItem>();
 
             foreach (RequestedProduct req in requestedProducts ) {
+                RequestedProduct dbRequestedProduct = _requestedProductService.GetRequestedProduct(req.Id);
                 DonationItem i = new DonationItem();
                 i.Id = Guid.NewGuid();
                 i.Amount = req.Amount;
-                i.Product = req.Product;
+                i.Product = dbRequestedProduct.Product;
                 donationItems.Add(i);
             }
             donation.Items = donationItems;
 
             Donation result = _donationRepository.Insert(donation);
-            __requestedProductService.CheckOutRequestedProducts(requestedProducts);
+            _requestedProductService.CheckOutRequestedProducts(requestedProducts);
 
             _uow.Commit();
             return result;

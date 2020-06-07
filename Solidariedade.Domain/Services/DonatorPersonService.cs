@@ -41,5 +41,10 @@ namespace Solidariedade.Domain.Services
         {
             return _donatorPersonRepository.GetByEmail(email);
         }
+
+        public DonatorPerson GetDonatorPersonByID(Guid id)
+        {
+            return _donatorPersonRepository.GetByID(id);
+        }
     }
 }

@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Solidariedade.Application.Implementations;
+using Solidariedade.Application.Implementations.Facades;
+using Solidariedade.Application.Implementations.Mappers;
 using Solidariedade.Application.Interfaces;
+using Solidariedade.Application.Interfaces.Facades;
+using Solidariedade.Application.Interfaces.Mappers;
 using Solidariedade.DataAccess;
 using Solidariedade.DataAccess.Context;
 using Solidariedade.DataAccess.Repositories;
@@ -41,6 +45,17 @@ namespace Solidariedade.CrossCutting
             services.AddScoped<IDoneePersonApp, DoneePersonApp>();
             services.AddScoped<IProductApp, ProductApp>();
             services.AddScoped<IRequestedProductApp, RequestedProductApp>();
+            services.AddScoped<ISessionApp, SessionApp>();
+
+            //Mappers
+            services.AddScoped<IPersonMapper, PersonMapper>();
+            services.AddScoped<IDonationMapper, DonationMapper>();
+            services.AddScoped<IDoneeMapper, DoneeMapper>();
+            services.AddScoped<IRequestedProductMapper, RequestedProductMapper>();
+            services.AddScoped<IDonatorMapper, DonatorMapper>();
+
+            //Facades
+            services.AddScoped<IPersonFacade, PersonFacade>();
         }
 
         public static void AddDbContext(this IServiceCollection services)

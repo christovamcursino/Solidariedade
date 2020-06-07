@@ -1,0 +1,43 @@
+﻿@model AddRequestViewModel
+
+@{
+    ViewData["Title"] = "Adicionar solicitacao";
+}
+
+
+<h1>Adicionar solicitação</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddRequest">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RequestedProduct.Product" class="control-label">Produto</label>
+                <select asp-for="RequestedProduct.Product.Id" class="form-control">
+                    @foreach (var item in Model.Products)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="RequestedProduct.Product" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequestedProduct.Amount" class="control-label">Quantidade</label>
+                <input asp-for="RequestedProduct.Amount" class="form-control" />
+                <span asp-validation-for="RequestedProduct.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Incluir Solicitação" class="btn btn-primary" >
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

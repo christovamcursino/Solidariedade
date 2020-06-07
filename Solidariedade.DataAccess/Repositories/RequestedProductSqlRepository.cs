@@ -23,9 +23,16 @@ namespace Solidariedade.DataAccess.Repositories
         public IEnumerable<RequestedProduct> GetAllRequestedProductOfState(State state)
         {
             return _context.Set<RequestedProduct>()
+                .Include(o=>o.DoneePerson)
                 .Where<RequestedProduct>(o => o.DoneePerson.State.UF.Equals(state.UF));
         }
 
+        public override RequestedProduct GetByID(Guid id)
+        {
+            return _context.Set<RequestedProduct>()
+                .Include(o=>o.Product)
+                .SingleOrDefault(o=>o.Id == id);
+        }
         public override IEnumerable<RequestedProduct> GetAll()
         {
             return _context.Set<RequestedProduct>()

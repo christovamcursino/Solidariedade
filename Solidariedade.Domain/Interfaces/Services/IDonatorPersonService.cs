@@ -9,6 +9,7 @@ namespace Solidariedade.Domain.Interfaces.Services
     public interface IDonatorPersonService
     {
         DonatorPerson AddDonatorPerson(DonatorPerson donatorPerson);
+        DonatorPerson GetDonatorPersonByID(Guid id);
         DonatorPerson GetDonatorPersonByEmail(String email);
         IEnumerable<DonatorPerson> GetAllDonators();
     }

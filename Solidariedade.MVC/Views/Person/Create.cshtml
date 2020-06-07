@@ -1,0 +1,57 @@
+﻿@model Solidariedade.Application.DTO.PersonDTO
+
+@{
+    ViewData["Title"] = "Novo usuario";
+}
+
+    <div class="">
+        <h1 class="display-4 center">Cadastro de novo usuario.</h1>
+
+        <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger">Email</div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control"  readonly/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger">Nome</div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label">Endereço</label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label">Cidade</label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UF" class="control-label">UF</label>
+                    <input asp-for="UF" class="form-control" />
+                    <span asp-validation-for="UF" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TipoPessoa" class="control-label">Você gostaria de doar ou receber?</label>
+                    <select asp-for="TipoPessoa" class="form-control">
+                        <option value="1">Doar</option>
+                        <option value="2">Receber</option>
+                    </select>
+                    <span asp-validation-for="TipoPessoa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+</div>

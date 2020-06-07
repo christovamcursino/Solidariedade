@@ -7,8 +7,8 @@ namespace Solidariedade.Domain.Entities.Donator
 {
     public class Donation : TEntity<Guid>
     {
-        public DonatorPerson DonatorPerson;
-        public DoneePerson DoneePerson;
+        public DonatorPerson DonatorPerson { get; set; }
+        public DoneePerson DoneePerson { get; set; }
 
         public DateTime DonationDate { get; set; }
         /// <summary>
