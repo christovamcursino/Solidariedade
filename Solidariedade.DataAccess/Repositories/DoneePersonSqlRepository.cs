@@ -14,7 +14,7 @@ namespace Solidariedade.DataAccess.Repositories
         {
             return _context.Set<DoneePerson>()
                 .Include(o => o.State)
-                .Include(o => o.RequestedProducts)
+                .Include(o => o.RequestedProducts).ThenInclude(i=>i.Product)
                 .Include(o => o.Donations)
                     .ThenInclude(d => d.DonatorPerson)
                 .Include(o => o.Donations)

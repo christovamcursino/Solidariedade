@@ -1,5 +1,6 @@
 ﻿@{ 
     System.Security.Claims.ClaimsPrincipal principal = Context.User;
+    string email = Solidariedade.MVC.Helpers.UserHelper.ExtractEmail(principal);
 }
 
 <!DOCTYPE html>
@@ -27,7 +28,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout @email</a>
                         </li>
                     </ul>
                 </div>

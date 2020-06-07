@@ -24,13 +24,16 @@ namespace Solidariedade.DataAccess.Repositories
         {
             return _context.Set<RequestedProduct>()
                 .Include(o=>o.DoneePerson)
-                .Where<RequestedProduct>(o => o.DoneePerson.State.UF.Equals(state.UF));
+                .Include(o=>o.Product)
+                .Where<RequestedProduct>(o => o.DoneePerson.State.UF.Equals(state.UF)
+                                               && o.Amount > 0);
         }
 
         public override RequestedProduct GetByID(Guid id)
         {
             return _context.Set<RequestedProduct>()
                 .Include(o=>o.Product)
+                .Include(o=>o.DoneePerson)
                 .SingleOrDefault(o=>o.Id == id);
         }
         public override IEnumerable<RequestedProduct> GetAll()
