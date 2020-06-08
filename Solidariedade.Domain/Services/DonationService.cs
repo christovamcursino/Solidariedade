@@ -11,12 +11,12 @@ namespace Solidariedade.Domain.Services
 {
     public class DonationService : IDonationService
     {
-        private IUnitOfWork _uow;
-        private IDonationRepository _donationRepository;
-        private IRequestedProductService _requestedProductService;
-        private IProductService _productService;
-        private IDoneePersonService _doneePersonService;
-        private IDonatorPersonService _donatorPersonService;
+        private readonly IUnitOfWork _uow;
+        private readonly IDonationRepository _donationRepository;
+        private readonly IRequestedProductService _requestedProductService;
+        private readonly IProductService _productService;
+        private readonly IDoneePersonService _doneePersonService;
+        private readonly IDonatorPersonService _donatorPersonService;
 
         public DonationService(IUnitOfWork uow, IDonationRepository donationRepository, IRequestedProductService requestedProductService, IProductService productService, IDoneePersonService doneePersonService, IDonatorPersonService donatorPersonService)
         {
@@ -28,12 +28,10 @@ namespace Solidariedade.Domain.Services
             _donatorPersonService = donatorPersonService;
         }
 
-        //INCLUIR A VALIDACAO
-
         public Donation AddDonation(Donation donation)
         {
             _uow.BeginTransaction();
-            prepare(donation);
+            Prepare(donation);
 
             foreach (DonationItem item in donation.Items)
             {
@@ -52,7 +50,7 @@ namespace Solidariedade.Domain.Services
             return result;
         }
 
-        private void prepare(Donation donation)
+        private void Prepare(Donation donation)
         {
             donation.Id = Guid.NewGuid();
             donation.DonatorPerson = _donatorPersonService.GetDonatorPersonByID(donation.DonatorPerson.Id);
@@ -63,7 +61,7 @@ namespace Solidariedade.Domain.Services
         public Donation AddDonation(Donation donation, IEnumerable<RequestedProduct> requestedProducts)
         {
             _uow.BeginTransaction();
-            prepare(donation);
+            Prepare(donation);
 
             List<DonationItem> donationItems = new List<DonationItem>();
 

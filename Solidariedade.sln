@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Application", "2-Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solidariedade.Application", "Solidariedade.Application\Solidariedade.Application.csproj", "{EE669788-B817-4526-9F26-A9CB42D324F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solidariedade.CrossCutting", "Solidariedade.CrossCutting\Solidariedade.CrossCutting.csproj", "{DD858282-41D7-4E33-AF47-88AD7DE91DF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solidariedade.CrossCutting", "Solidariedade.CrossCutting\Solidariedade.CrossCutting.csproj", "{DD858282-41D7-4E33-AF47-88AD7DE91DF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,7 +65,7 @@ Global
 		{D22466EF-3656-4B21-9907-B2ECA1D91E61} = {88D360C8-F1AE-4440-9FD5-9BDE700E1405}
 		{608F0AD6-74DE-4E07-A325-FA74EB0895F0} = {80813F95-B8AC-465A-A47D-43358E6BC8F0}
 		{EE669788-B817-4526-9F26-A9CB42D324F2} = {42E80F21-3F99-4B8A-BC22-213F8891B550}
-		{DD858282-41D7-4E33-AF47-88AD7DE91DF3} = {42E80F21-3F99-4B8A-BC22-213F8891B550}
+		{DD858282-41D7-4E33-AF47-88AD7DE91DF3} = {88D360C8-F1AE-4440-9FD5-9BDE700E1405}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {507BCE57-9E15-4D36-94FD-E60BC483981D}
